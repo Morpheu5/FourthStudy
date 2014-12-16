@@ -58,15 +58,7 @@ void FourthStudy::TheApp::setup() {
 		reverse(notes.begin(), notes.end());
 		_scales[name] = notes;
 	}
-	
-	_freeComposition = true;
-    _sequencesMutex.lock();
-    _sequences.clear();
-    _widgetsMutex.lock();
-    _widgets.clear();
-    _widgetsMutex.unlock();
-    _sequencesMutex.unlock();
-	
+
 	auto logfilepath = _basepath/"logs";
 	if(!fs::exists(logfilepath)) {
 		fs::create_directories(logfilepath);
@@ -118,6 +110,9 @@ void FourthStudy::TheApp::setup() {
 
 	go = false;
 	_marker = false;
+    _freeComposition = true;
+    
+    _bgWhite = 0.0f;
 }
 
 void FourthStudy::TheApp::prepareSettings(Settings *settings) {
@@ -160,25 +155,18 @@ void FourthStudy::TheApp::keyDown(KeyEvent event) {
 			setFullScreen(!isFullScreen());
 			break;
 		}
-        case KeyEvent::KEY_s: {
-            std::time_t t = std::time(nullptr);
-            stringstream fn;
-            fn << "screenshot_" << std::put_time(std::localtime(&t), "%Y-%m-%d_%H-%M-%S") << ".png";
-            auto sspath = _basepath / "screenshots" / fn.str();
-            writeImage(sspath, copyWindowSurface());
-            
+        case KeyEvent::KEY_m: {
+            if(_marker) {
+                Logger::instance().log("---- STOP ----");
+                _marker = false;
+                _bgWhite = 0.5f;
+            } else {
+                Logger::instance().log("---- START ----");
+                _marker = true;
+                _bgWhite = 0.5f;
+            }
             break;
         }
-		case KeyEvent::KEY_m: {
-			if(_marker) {
-				Logger::instance().log("---- STOP ----");
-				_marker = false;
-			} else {
-				Logger::instance().log("---- START ----");
-				_marker = true;
-			}
-			break;
-		}
 		case KeyEvent::KEY_l: {
 			if(_freeComposition) {
 				Logger::instance().log(stringstream() << "Free composition");
@@ -186,9 +174,9 @@ void FourthStudy::TheApp::keyDown(KeyEvent event) {
 				Logger::instance().log(stringstream() << "Exercise " << _currentExercise+1);
 			}
 			_sequencesMutex.lock();
+            stringstream ss;
+            ss << "Sequence -- ";
 			for(auto s : _sequences) {
-				stringstream ss;
-				ss << "Sequence -- ";
 				_widgetsMutex.lock();
 				for(auto w : s) {
 					ss << "[";
@@ -203,11 +191,19 @@ void FourthStudy::TheApp::keyDown(KeyEvent event) {
 					ss << "]";
 				}
 				_widgetsMutex.unlock();
-				Logger::instance().log(ss.str());
 			}
+            Logger::instance().log(ss.str());
 			_sequencesMutex.unlock();
-			break;
+            _bgWhite = 0.5f;
 		}
+        case KeyEvent::KEY_s: {
+            std::time_t t = std::time(nullptr);
+            stringstream fn;
+            fn << "screenshot_" << std::put_time(std::localtime(&t), "%Y-%m-%d_%H-%M-%S") << ".png";
+            auto sspath = _basepath / "screenshots" / fn.str();
+            writeImage(sspath, copyWindowSurface());
+            break;
+        }
 		case KeyEvent::KEY_c: {
 			_freeComposition = true;
 			_sequencesMutex.lock();
@@ -273,9 +269,15 @@ void FourthStudy::TheApp::draw() {
 	// clear out the window with black
 	gl::clear(ColorAf(0.0f, 0.0f, 0.0f, 1.0f));
 	
-	gl::color(0.0f, 0.0f, 0.0f);
+	gl::color(_bgWhite, _bgWhite, _bgWhite);
 	gl::drawSolidRect(getWindowBounds());
-	
+
+    if(_bgWhite > 0.0f) {
+        _bgWhite -= 0.05f;
+    } else {
+        _bgWhite = 0.0f;
+    }
+
 	gl::color(1.0f, 1.0f, 1.0f, 1.0f);
 	glLineWidth(5.0f);
 	

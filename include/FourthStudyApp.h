@@ -80,6 +80,8 @@ namespace FourthStudy {
 		bool _freeComposition;
         
         boost::filesystem::path _basepath;
+        
+        float _bgWhite;
 		
 	public:
 		void prepareSettings(Settings *settings);
