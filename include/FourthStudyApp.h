@@ -78,12 +78,16 @@ namespace FourthStudy {
 		int _currentExercise;
 		
 		bool _freeComposition;
+        
+        boost::filesystem::path _basepath;
 		
 	public:
 		void prepareSettings(Settings *settings);
 		void setup();
 		void shutdown();
-		void mouseDown( MouseEvent event );
+        void mouseDown( MouseEvent event );
+        void mouseDrag( MouseEvent event );
+        void mouseUp( MouseEvent event );
         void keyDown(KeyEvent event);
 		void update();
 		void draw();

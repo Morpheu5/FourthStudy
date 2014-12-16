@@ -96,7 +96,7 @@
 		A3703C1917AC480800002544 /* Gesture.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = Gesture.h; path = ../include/Gesture.h; sourceTree = "<group>"; };
 		A3703C1A17AC483600002544 /* TapGesture.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = TapGesture.h; path = ../include/TapGesture.h; sourceTree = "<group>"; };
 		A3703C1B17AC4ABE00002544 /* TapGestureRecognizer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = TapGestureRecognizer.h; path = ../include/TapGestureRecognizer.h; sourceTree = "<group>"; };
-		A381D1DD1886BABE00CA94D4 /* FourthStudy-multi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FourthStudy-multi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A381D1DD1886BABE00CA94D4 /* FourthStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourthStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CDD0FC19E7E724003D1167 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		A3CDD0FD19E7E724003D1167 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
 		A3CDD0FE19E7E724003D1167 /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
@@ -207,7 +207,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A381D1DD1886BABE00CA94D4 /* FourthStudy-multi.app */,
+				A381D1DD1886BABE00CA94D4 /* FourthStudy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -450,7 +450,7 @@
 			name = FourthStudy;
 			productInstallPath = "$(HOME)/Applications";
 			productName = SecondStudy;
-			productReference = A381D1DD1886BABE00CA94D4 /* FourthStudy-multi.app */;
+			productReference = A381D1DD1886BABE00CA94D4 /* FourthStudy.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -556,7 +556,7 @@
 					"\"$(SRCROOT)/../../cinder_0.8.6_mac/lib\"",
 				);
 				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder_d.a\"";
-				PRODUCT_NAME = "FourthStudy-multi";
+				PRODUCT_NAME = FourthStudy;
 				SDKROOT = macosx;
 				SYMROOT = ./build;
 				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include $(CINDER_PATH)/blocks/OSC/src $(CINDER_PATH)/blocks/TUIO/include";
@@ -585,7 +585,7 @@
 					"\"$(SRCROOT)/../../cinder_0.8.6_mac/lib\"",
 				);
 				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder.a\"";
-				PRODUCT_NAME = "FourthStudy-multi";
+				PRODUCT_NAME = FourthStudy;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
 				SYMROOT = ./build;

@@ -32,12 +32,12 @@ void FourthStudy::TheApp::setup() {
 	_screenOffset = Vec2f(0.0f, 0.0f);
 	
 #if DEBUG==1
-	auto basepath = getHomeDirectory()/"src/FourthStudy";
+	_basepath = getHomeDirectory()/"src/FourthStudy";
 #else
-	auto basepath = getAppPath().remove_filename();
+	_basepath = getAppPath().remove_filename();
 #endif
 	
-	auto exfilepath = basepath/"assets/exercises.xml";
+	auto exfilepath = _basepath/"assets/exercises.xml";
 	if(!fs::exists(exfilepath)) {
 		quit();
 	}
@@ -46,6 +46,7 @@ void FourthStudy::TheApp::setup() {
 	// Import scales
 	for(auto xScale : exDoc.getChild("root/scales")) {
 		string name = xScale.getAttributeValue<string>("name");
+        cout << name << endl;
 		vector<string> nStrings = split(xScale.getValue<string>(), ",");
 		vector<int> notes;
 		for(string s : nStrings) {
@@ -58,38 +59,15 @@ void FourthStudy::TheApp::setup() {
 		_scales[name] = notes;
 	}
 	
-	_currentExercise = -1;
-	_freeComposition = false;
+	_freeComposition = true;
+    _sequencesMutex.lock();
+    _sequences.clear();
+    _widgetsMutex.lock();
+    _widgets.clear();
+    _widgetsMutex.unlock();
+    _sequencesMutex.unlock();
 	
-	// Import exercises
-	for(auto xExercise : exDoc.getChild("root/exercises")) {
-		auto exercise = vector<shared_ptr<MeasureWidget>>();
-		for(auto xMeasure : xExercise) {
-			// Grab the scale
-			string scale = xMeasure.getAttributeValue<string>("scale");
-			auto notes = _scales[scale];
-			
-			// Grab the melody
-			vector<string> svMelody = split(xMeasure.getAttributeValue<string>("melody"), ",");
-			vector<int> melody;
-			for(auto s : svMelody) {
-				int value;
-				stringstream converter(s);
-				converter >> value;
-				melody.push_back(value);
-			}
-			auto mw = make_shared<MeasureWidget>(Vec2f::zero(), notes.size(), melody.size());
-			mw->setMidiNotes(notes);
-			for(int i = 0; i < melody.size(); i++) {
-				// DAFUQ -3? FIXME
-				mw->toggle(pair<int, int>(i, notes.size() - melody[i]), false);
-			}
-			exercise.push_back(mw);
-		}
-		_exercises.push_back(exercise);
-	}
-	
-	auto logfilepath = basepath/"logs";
+	auto logfilepath = _basepath/"logs";
 	if(!fs::exists(logfilepath)) {
 		fs::create_directories(logfilepath);
 	}
@@ -98,7 +76,11 @@ void FourthStudy::TheApp::setup() {
 	fn << "FourthStudy_" << std::put_time(std::localtime(&t), "%Y-%m-%d_%H-%M-%S") << ".log";
 	logfilepath /= fn.str();
 	Logger::instance().init(logfilepath.string());
-	Logger::instance().log("FourthStudy starting up...");
+    
+    auto screenshotspath = _basepath/"screenshots";
+    if(!fs::exists(screenshotspath)) {
+        fs::create_directories(screenshotspath);
+    }
 	
 	_loggerThread = thread(bind(&Logger::run, &(Logger::instance())));
 	
@@ -136,8 +118,6 @@ void FourthStudy::TheApp::setup() {
 
 	go = false;
 	_marker = false;
-	
-	Logger::instance().log("FourthStudy ready to roll.");
 }
 
 void FourthStudy::TheApp::prepareSettings(Settings *settings) {
@@ -156,18 +136,22 @@ void FourthStudy::TheApp::shutdown() {
 	_gestureEngine.join();
 }
 
-void FourthStudy::TheApp::mouseDown( MouseEvent event ) {
-	_signals = 1000;
-	_counter = 0;
-	
-	timeline().stepTo(0);
-	for(int i = 0; i < _signals; i++) {
-		timeline().add([this]() mutable {
-			_counter++;
-		}, i*1.0f);
-	}
-	timeline().stepTo(10000);
-	assert(_signals == _counter);
+void FourthStudy::TheApp::mouseDown(MouseEvent event) {
+    Vec2f p(event.getPos());
+    Cursor c("/tuio/2Dcur", 1, p);
+    cursorAdded(c);
+}
+
+void FourthStudy::TheApp::mouseDrag(MouseEvent event) {
+    Vec2f p(event.getPos());
+    Cursor c("/tuio/2Dcur", 1, p);
+    cursorUpdated(c);
+}
+
+void FourthStudy::TheApp::mouseUp(MouseEvent event) {
+    Vec2f p(event.getPos());
+    Cursor c("/tuio/2Dcur", 1, p);
+    cursorRemoved(c);
 }
 
 void FourthStudy::TheApp::keyDown(KeyEvent event) {
@@ -176,6 +160,15 @@ void FourthStudy::TheApp::keyDown(KeyEvent event) {
 			setFullScreen(!isFullScreen());
 			break;
 		}
+        case KeyEvent::KEY_s: {
+            std::time_t t = std::time(nullptr);
+            stringstream fn;
+            fn << "screenshot_" << std::put_time(std::localtime(&t), "%Y-%m-%d_%H-%M-%S") << ".png";
+            auto sspath = _basepath / "screenshots" / fn.str();
+            writeImage(sspath, copyWindowSurface());
+            
+            break;
+        }
 		case KeyEvent::KEY_m: {
 			if(_marker) {
 				Logger::instance().log("---- STOP ----");
@@ -213,62 +206,6 @@ void FourthStudy::TheApp::keyDown(KeyEvent event) {
 				Logger::instance().log(ss.str());
 			}
 			_sequencesMutex.unlock();
-			break;
-		}
-		case KeyEvent::KEY_e: {
-			if(_currentExercise >= (int)_exercises.size()-1) {
-				break;
-			}
-
-			_currentExercise++;
-		}
-		case KeyEvent::KEY_r: {
-			_freeComposition = false;
-			_sequencesMutex.lock();
-			_sequences.clear();
-			_widgetsMutex.lock();
-			_widgets.clear();
-			_widgetsMutex.unlock();
-			_sequencesMutex.unlock();
-			
-			auto& e = _exercises[_currentExercise];
-			if(e.size() == 2) {
-				_widgetsMutex.lock();
-				e.front()->position(Vec2f(getWindowWidth()/4.0f, getWindowHeight()/2));
-				e.back()->position(Vec2f(3.0f*getWindowWidth()/4.0f, getWindowHeight()/2));
-				_widgets.push_back(e.front());
-				_widgets.push_back(e.back());
-				_widgetsMutex.unlock();
-				
-				_sequencesMutex.lock();
-				list<shared_ptr<MeasureWidget>> sa;
-				sa.push_back(e.front());
-				list<shared_ptr<MeasureWidget>> sb;
-				sb.push_back(e.back());
-				_sequences.push_back(sa);
-				_sequences.push_back(sb);
-				_sequencesMutex.unlock();
-			} else if(e.size() > 2) {
-				int rim = 300;
-				int width = getWindowWidth() - rim;
-				int height = getWindowHeight() - rim;
-				int dx = width/e.size();
-				int dy = height/e.size();
-				_widgetsMutex.lock();
-				for(int i = 0; i < e.size(); i++) {
-					e[i]->position(Vec2f(rim + i*dx, rim + i*dy));
-					_widgets.push_back(e[i]);
-				}
-				_widgetsMutex.unlock();
-				
-				_sequencesMutex.lock();
-				list<shared_ptr<MeasureWidget>> s;
-				for(auto w : e) {
-					s.push_back(w);
-				}
-				_sequences.push_back(s);
-				_sequencesMutex.unlock();
-			}
 			break;
 		}
 		case KeyEvent::KEY_c: {
