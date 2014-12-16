@@ -110,7 +110,7 @@ void FourthStudy::TheApp::setup() {
 
 	go = false;
 	_marker = false;
-    _freeComposition = true;
+    _freeComposition = false;
     
     _bgWhite = 0.0f;
 }
@@ -169,9 +169,9 @@ void FourthStudy::TheApp::keyDown(KeyEvent event) {
         }
 		case KeyEvent::KEY_l: {
 			if(_freeComposition) {
-				Logger::instance().log(stringstream() << "Free composition");
+				Logger::instance().log(stringstream() << "Milestone free");
 			} else {
-				Logger::instance().log(stringstream() << "Exercise " << _currentExercise+1);
+				Logger::instance().log(stringstream() << "Milestone " << _currentExercise+1);
 			}
 			_sequencesMutex.lock();
             stringstream ss;
@@ -340,7 +340,6 @@ void FourthStudy::TheApp::draw() {
 			}
 			if(trace->isVisible) {
 				gl::drawSolidCircle(tuioToWindow(trace->currentPosition()), 8.0f);
-//				gl::drawSolidCircle(tuioToWindow(trace->currentPosition()), 50.0f);
 			} else {
 				gl::drawSolidCircle(tuioToWindow(trace->currentPosition()), 4.0f);
 			}
@@ -538,31 +537,29 @@ void FourthStudy::TheApp::gestureProcessor() {
 				}
 			}
 			
-			if(_freeComposition) {
-				if(dynamic_pointer_cast<LongTapGesture>(unknownGesture)) {
-					shared_ptr<LongTapGesture> longtap = dynamic_pointer_cast<LongTapGesture>(unknownGesture);
-					if(!longtap->isOnWidget()) {
-						_widgetsMutex.lock();
-						Vec2f p = longtap->position();
-						auto w = make_shared<MeasureWidget>(p, 8, 8);
-						// FIXME: hardcoded
-						w->setMidiNotes(_scales["dia_c"]);
-						Vec2f c = getWindowCenter();
-						float a = atan2(p.y-c.y, p.x-c.x);
-						w->angle(a - M_PI_2);
-						_widgets.push_back(w);
-						_widgetsMutex.unlock();
-						
-						_sequencesMutex.lock();
-						list<shared_ptr<MeasureWidget>> s;
-						s.push_back(w);
-						_sequences.push_back(s);
-						_sequencesMutex.unlock();
-						
-						Logger::instance().log(stringstream() << "TheApp::gestureProcessor LongTapGesture -- new MeasureWidget (x:" << longtap->position().x << " y:" << longtap->position().y << " id:" << w->id() << ")");
-					}
-				}
-			}
+            if(dynamic_pointer_cast<LongTapGesture>(unknownGesture)) {
+                shared_ptr<LongTapGesture> longtap = dynamic_pointer_cast<LongTapGesture>(unknownGesture);
+                if(!longtap->isOnWidget()) {
+                    _widgetsMutex.lock();
+                    Vec2f p = longtap->position();
+                    auto w = make_shared<MeasureWidget>(p, 8, 8);
+                    // FIXME: hardcoded
+                    w->setMidiNotes(_scales["dia_c"]);
+                    Vec2f c = getWindowCenter();
+                    float a = atan2(p.y-c.y, p.x-c.x);
+                    w->angle(a - M_PI_2);
+                    _widgets.push_back(w);
+                    _widgetsMutex.unlock();
+                    
+                    _sequencesMutex.lock();
+                    list<shared_ptr<MeasureWidget>> s;
+                    s.push_back(w);
+                    _sequences.push_back(s);
+                    _sequencesMutex.unlock();
+                    
+                    Logger::instance().log(stringstream() << "TheApp::gestureProcessor LongTapGesture -- new MeasureWidget (x:" << longtap->position().x << " y:" << longtap->position().y << " id:" << w->id() << ")");
+                }
+            }
 		}
 	}
 }
