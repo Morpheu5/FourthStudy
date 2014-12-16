@@ -5,7 +5,7 @@
 using namespace ci;
 using namespace ci::tuio;
 
-namespace ThirdStudy {
+namespace FourthStudy {
 
 	class TouchPoint : public Cursor {
 	public:

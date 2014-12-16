@@ -4,18 +4,18 @@
 #include "TouchTrace.h"
 #include "PinchGesture.h"
 
-#include "ThirdStudyApp.h"
+#include "FourthStudyApp.h"
 
 using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-ThirdStudy::PinchGestureRecognizer::PinchGestureRecognizer(shared_ptr<list<shared_ptr<Gesture>>> gestures, shared_ptr<mutex> mtx) {
+FourthStudy::PinchGestureRecognizer::PinchGestureRecognizer(shared_ptr<list<shared_ptr<Gesture>>> gestures, shared_ptr<mutex> mtx) {
 	_gestures = gestures;
 	_gesturesMutex = mtx;
 }
 
-void ThirdStudy::PinchGestureRecognizer::processGroup(list<shared_ptr<TouchTrace>> group) {
+void FourthStudy::PinchGestureRecognizer::processGroup(list<shared_ptr<TouchTrace>> group) {
 	if(group.size() >= 2) {
         // Always take the first two, discard subsequents as they may be artifacts.
         // Anyway, they are worthless. The gesture requires two fingers.

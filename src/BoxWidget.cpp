@@ -2,21 +2,21 @@
 
 using namespace ci;
 
-ThirdStudy::BoxWidget::BoxWidget() : ThirdStudy::Widget() {
+FourthStudy::BoxWidget::BoxWidget() : FourthStudy::Widget() {
 	_scale = 1.0f;
 	_board = Rectf(-80.0f, -60.0f, 80.0f, 60.0f);
 	_position = Vec2f(0.0f, 0.0f);
 	_angle = 0.0f;
 }
 
-ThirdStudy::BoxWidget::BoxWidget(Vec2f center) : ThirdStudy::Widget() {
+FourthStudy::BoxWidget::BoxWidget(Vec2f center) : FourthStudy::Widget() {
 	_scale = 1.0f;
 	_board = Rectf(-80.0f, -60.0f, 80.0f, 60.0f);
 	_angle = 0.0f;
 	_position = center;
 }
 
-void ThirdStudy::BoxWidget::draw() {
+void FourthStudy::BoxWidget::draw() {
 	gl::pushModelView();
 
 	Matrix44f transform;
@@ -35,7 +35,7 @@ void ThirdStudy::BoxWidget::draw() {
 	gl::popModelView();
 }
 
-bool ThirdStudy::BoxWidget::hit(Vec2f p) {
+bool FourthStudy::BoxWidget::hit(Vec2f p) {
 	Matrix44f transform;
 	transform.translate(Vec3f(_position));
 	transform.rotate(Vec3f(0.0f, 0.0f, _angle));
@@ -45,18 +45,18 @@ bool ThirdStudy::BoxWidget::hit(Vec2f p) {
 	return (_board * _scale).contains(tp);
 }
 
-void ThirdStudy::BoxWidget::tap(Vec2f p) {
+void FourthStudy::BoxWidget::tap(Vec2f p) {
 	//_scale += 0.1f;
 }
 
-void ThirdStudy::BoxWidget::moveBy(Vec2f v) {
+void FourthStudy::BoxWidget::moveBy(Vec2f v) {
 	_position += v;
 }
 
-void ThirdStudy::BoxWidget::zoomBy(float s) {
+void FourthStudy::BoxWidget::zoomBy(float s) {
     // _scale += s;
 }
 
-void ThirdStudy::BoxWidget::rotateBy(float a) {
+void FourthStudy::BoxWidget::rotateBy(float a) {
     _angle += a;
 }

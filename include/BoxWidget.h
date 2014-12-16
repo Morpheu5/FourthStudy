@@ -4,7 +4,7 @@
 
 using namespace ci;
 
-namespace ThirdStudy {
+namespace FourthStudy {
 
 	class BoxWidget : public Widget {
 		Rectf _board;

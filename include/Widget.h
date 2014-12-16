@@ -2,7 +2,7 @@
 
 using namespace ci;
 
-namespace ThirdStudy {
+namespace FourthStudy {
 
 	class Widget {
 		static unsigned long s_id;

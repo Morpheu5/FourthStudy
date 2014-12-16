@@ -7,18 +7,18 @@
 #include "Widget.h"
 #include "MeasureWidget.h"
 
-#include "ThirdStudyApp.h"
+#include "FourthStudyApp.h"
 
 using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-ThirdStudy::DisconnectionGestureRecognizer::DisconnectionGestureRecognizer(shared_ptr<list<shared_ptr<Gesture>>> gestures, shared_ptr<mutex> mtx) {
+FourthStudy::DisconnectionGestureRecognizer::DisconnectionGestureRecognizer(shared_ptr<list<shared_ptr<Gesture>>> gestures, shared_ptr<mutex> mtx) {
 	_gestures = gestures;
 	_gesturesMutex = mtx;
 }
 
-void ThirdStudy::DisconnectionGestureRecognizer::processGroup(list<shared_ptr<TouchTrace>> group) {
+void FourthStudy::DisconnectionGestureRecognizer::processGroup(list<shared_ptr<TouchTrace>> group) {
 	if(group.size() == 1) {
 		auto trace = group.front();
 		TheApp *theApp = (TheApp *)App::get();

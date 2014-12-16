@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ThirdStudy {
+namespace FourthStudy {
 	
 	class Gesture {
 

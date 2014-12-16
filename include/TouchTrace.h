@@ -7,7 +7,7 @@
 using namespace ci;
 using namespace std;
 
-namespace ThirdStudy {
+namespace FourthStudy {
 	
 	class TouchPoint;
 

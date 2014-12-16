@@ -2,7 +2,7 @@
 
 #include "Gesture.h"
 
-namespace ThirdStudy {
+namespace FourthStudy {
 	
 	class LongTapGesture : public Gesture {
 		ci::Vec2f _position;

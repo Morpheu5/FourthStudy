@@ -1,4 +1,4 @@
-#include "ThirdStudyApp.h"
+#include "FourthStudyApp.h"
 
 #include "TouchPoint.h"
 #include "TouchTrace.h"
@@ -27,12 +27,12 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-void ThirdStudy::TheApp::setup() {
+void FourthStudy::TheApp::setup() {
 	_screenZoom = 1.0f;
 	_screenOffset = Vec2f(0.0f, 0.0f);
 	
 #if DEBUG==1
-	auto basepath = getHomeDirectory()/"src/ThirdStudy";
+	auto basepath = getHomeDirectory()/"src/FourthStudy";
 #else
 	auto basepath = getAppPath().remove_filename();
 #endif
@@ -95,10 +95,10 @@ void ThirdStudy::TheApp::setup() {
 	}
 	std::time_t t = std::time(nullptr);
 	stringstream fn;
-	fn << "ThirdStudy_" << std::put_time(std::localtime(&t), "%Y-%m-%d_%H-%M-%S") << ".log";
+	fn << "FourthStudy_" << std::put_time(std::localtime(&t), "%Y-%m-%d_%H-%M-%S") << ".log";
 	logfilepath /= fn.str();
 	Logger::instance().init(logfilepath.string());
-	Logger::instance().log("ThirdStudy starting up...");
+	Logger::instance().log("FourthStudy starting up...");
 	
 	_loggerThread = thread(bind(&Logger::run, &(Logger::instance())));
 	
@@ -107,9 +107,9 @@ void ThirdStudy::TheApp::setup() {
 	
 	auto renderer = std::static_pointer_cast<RendererGl>(getRenderer());
 
-	_tuioClient.registerCursorAdded(this, &ThirdStudy::TheApp::cursorAdded);
-	_tuioClient.registerCursorUpdated(this, &ThirdStudy::TheApp::cursorUpdated);
-	_tuioClient.registerCursorRemoved(this, &ThirdStudy::TheApp::cursorRemoved);
+	_tuioClient.registerCursorAdded(this, &FourthStudy::TheApp::cursorAdded);
+	_tuioClient.registerCursorUpdated(this, &FourthStudy::TheApp::cursorUpdated);
+	_tuioClient.registerCursorRemoved(this, &FourthStudy::TheApp::cursorRemoved);
 		
 	_tuioClient.connect(); // Defaults to UDP:3333
 	
@@ -129,25 +129,25 @@ void ThirdStudy::TheApp::setup() {
 
 	// At last, fire up the gesture engine...
 	_gestureEngineShouldStop = false;
-	_gestureEngine = thread(bind(&ThirdStudy::TheApp::gestureEngine, this));
+	_gestureEngine = thread(bind(&FourthStudy::TheApp::gestureEngine, this));
 	// ... and the gesture processor.
 	_gestureProcessorShouldStop = false;
-	_gestureProcessor = thread(bind(&ThirdStudy::TheApp::gestureProcessor, this));
+	_gestureProcessor = thread(bind(&FourthStudy::TheApp::gestureProcessor, this));
 
 	go = false;
 	_marker = false;
 	
-	Logger::instance().log("ThirdStudy ready to roll.");
+	Logger::instance().log("FourthStudy ready to roll.");
 }
 
-void ThirdStudy::TheApp::prepareSettings(Settings *settings) {
+void FourthStudy::TheApp::prepareSettings(Settings *settings) {
 	settings->enableHighDensityDisplay();
 	settings->setFrameRate(FPS);
 	settings->setWindowSize(720, 480);
 //	settings->setFullScreen();
 }
 
-void ThirdStudy::TheApp::shutdown() {
+void FourthStudy::TheApp::shutdown() {
 	_gestureEngineShouldStop = true;
 	_gestureProcessorShouldStop = true;
 	Logger::instance().stop();
@@ -156,7 +156,7 @@ void ThirdStudy::TheApp::shutdown() {
 	_gestureEngine.join();
 }
 
-void ThirdStudy::TheApp::mouseDown( MouseEvent event ) {
+void FourthStudy::TheApp::mouseDown( MouseEvent event ) {
 	_signals = 1000;
 	_counter = 0;
 	
@@ -170,7 +170,7 @@ void ThirdStudy::TheApp::mouseDown( MouseEvent event ) {
 	assert(_signals == _counter);
 }
 
-void ThirdStudy::TheApp::keyDown(KeyEvent event) {
+void FourthStudy::TheApp::keyDown(KeyEvent event) {
     switch(event.getCode()) {
         case KeyEvent::KEY_f: {
 			setFullScreen(!isFullScreen());
@@ -287,7 +287,7 @@ void ThirdStudy::TheApp::keyDown(KeyEvent event) {
     }
 }
 
-void ThirdStudy::TheApp::update() {
+void FourthStudy::TheApp::update() {
 	_sequencesMutex.lock();
 	_sequences.remove_if( [](list<shared_ptr<MeasureWidget>> l) {
 		return l.empty();
@@ -332,7 +332,7 @@ void ThirdStudy::TheApp::update() {
 	_groupsMutex.unlock();
 }
 
-void ThirdStudy::TheApp::draw() {
+void FourthStudy::TheApp::draw() {
 	// clear out the window with black
 	gl::clear(ColorAf(0.0f, 0.0f, 0.0f, 1.0f));
 	
@@ -411,11 +411,11 @@ void ThirdStudy::TheApp::draw() {
 	_tracesMutex.unlock();
 }
 
-void ThirdStudy::TheApp::resize() {
+void FourthStudy::TheApp::resize() {
 	//gl::setViewport(getWindowBounds());
 }
 
-void ThirdStudy::TheApp::gestureEngine() {
+void FourthStudy::TheApp::gestureEngine() {
 	while(!_gestureEngineShouldStop) {
 		// PROGRESSIVEs can be dealt with using a signal. For now I'll keep the thing in the methods below
 		this_thread::sleep_for(chrono::milliseconds((long long)floor(100.0f / FPS)));
@@ -436,7 +436,7 @@ void ThirdStudy::TheApp::gestureEngine() {
 	}
 }
 
-void ThirdStudy::TheApp::gestureProcessor() {
+void FourthStudy::TheApp::gestureProcessor() {
 	while(!_gestureProcessorShouldStop) {
 		this_thread::sleep_for(chrono::milliseconds((long long)floor(100.0f / FPS)));
 		if(_gestures->size() > 0) {
@@ -628,7 +628,7 @@ void ThirdStudy::TheApp::gestureProcessor() {
 	}
 }
 
-void ThirdStudy::TheApp::measureHasFinishedPlaying(int id) {
+void FourthStudy::TheApp::measureHasFinishedPlaying(int id) {
 	_sequencesMutex.lock();
 	for(auto sit = _sequences.begin(); sit != _sequences.end(); ++sit) {
 		for(auto wit = sit->begin(); wit != sit->end(); ++wit) {
@@ -642,7 +642,7 @@ void ThirdStudy::TheApp::measureHasFinishedPlaying(int id) {
 	_sequencesMutex.unlock();
 }
 	
-void ThirdStudy::TheApp::cursorAdded(tuio::Cursor cursor) {
+void FourthStudy::TheApp::cursorAdded(tuio::Cursor cursor) {
 	//console() << "Add" << endl;
 	bool continued = false;
 	int joined = -1;
@@ -711,7 +711,7 @@ void ThirdStudy::TheApp::cursorAdded(tuio::Cursor cursor) {
 //	Logger::instance().log(ss.str());
 }
 
-void ThirdStudy::TheApp::cursorUpdated(tuio::Cursor cursor) {
+void FourthStudy::TheApp::cursorUpdated(tuio::Cursor cursor) {
 	//console() << "Upd" << endl;
 	go = true;
 	_tracesMutex.lock();
@@ -734,7 +734,7 @@ void ThirdStudy::TheApp::cursorUpdated(tuio::Cursor cursor) {
 //	Logger::instance().log(ss.str());
 }
 
-void ThirdStudy::TheApp::cursorRemoved(tuio::Cursor cursor) {
+void FourthStudy::TheApp::cursorRemoved(tuio::Cursor cursor) {
 	//console() << "Rem" << endl;
 	go = true;
 	_tracesMutex.lock();
@@ -758,7 +758,7 @@ void ThirdStudy::TheApp::cursorRemoved(tuio::Cursor cursor) {
 //	Logger::instance().log(ss.str());
 }
 
-int ThirdStudy::TheApp::findGroupForTrace(shared_ptr<TouchTrace> trace) {
+int FourthStudy::TheApp::findGroupForTrace(shared_ptr<TouchTrace> trace) {
 	// First: group traces on the same widget
 	for(int i = 0; i < _groups.size(); i++) {
 		for(auto otherTrace : _groups[i]) {
@@ -782,4 +782,4 @@ int ThirdStudy::TheApp::findGroupForTrace(shared_ptr<TouchTrace> trace) {
 	return -1;
 }
 
-CINDER_APP_NATIVE( ThirdStudy::TheApp, RendererGl(RendererGl::AA_MSAA_4) )
+CINDER_APP_NATIVE( FourthStudy::TheApp, RendererGl(RendererGl::AA_MSAA_4) )

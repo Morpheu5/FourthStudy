@@ -4,18 +4,18 @@
 #include "TouchTrace.h"
 #include "LongTapGesture.h"
 
-#include "ThirdStudyApp.h"
+#include "FourthStudyApp.h"
 
 using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-ThirdStudy::LongTapGestureRecognizer::LongTapGestureRecognizer(shared_ptr<list<shared_ptr<Gesture>>> gestures, shared_ptr<mutex> mtx) {
+FourthStudy::LongTapGestureRecognizer::LongTapGestureRecognizer(shared_ptr<list<shared_ptr<Gesture>>> gestures, shared_ptr<mutex> mtx) {
 	_gestures = gestures;
 	_gesturesMutex = mtx;
 }
 
-void ThirdStudy::LongTapGestureRecognizer::processGroup(list<shared_ptr<TouchTrace>> group) {
+void FourthStudy::LongTapGestureRecognizer::processGroup(list<shared_ptr<TouchTrace>> group) {
 	if(group.size() == 1) {
 		auto trace = group.front();
 		TheApp *theApp = (TheApp *)App::get();

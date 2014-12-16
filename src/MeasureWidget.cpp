@@ -3,7 +3,7 @@
 #include "TouchPoint.h"
 #include "TouchTrace.h"
 
-#include "ThirdStudyApp.h"
+#include "FourthStudyApp.h"
 
 #include "Logger.h"
 
@@ -14,7 +14,7 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-ThirdStudy::MeasureWidget::MeasureWidget() : Widget() {
+FourthStudy::MeasureWidget::MeasureWidget() : Widget() {
 	_scale = 1.0f;
 	_position = Vec2f(0.0f, 0.0f);
 	_angle = 0.0f;
@@ -41,7 +41,7 @@ ThirdStudy::MeasureWidget::MeasureWidget() : Widget() {
 	isPlaying = false;
 }
 
-ThirdStudy::MeasureWidget::MeasureWidget(Vec2f center, int rows, int columns) : Widget(),
+FourthStudy::MeasureWidget::MeasureWidget(Vec2f center, int rows, int columns) : Widget(),
 	_measureSize(pair<int, int>(columns, rows)) {
 	
     _scale = 1.0f;
@@ -69,7 +69,7 @@ ThirdStudy::MeasureWidget::MeasureWidget(Vec2f center, int rows, int columns) : 
 	isPlaying = false;
 }
 
-void ThirdStudy::MeasureWidget::draw() {
+void FourthStudy::MeasureWidget::draw() {
 	gl::pushModelView();
     
 	Matrix44f transform;
@@ -121,7 +121,7 @@ void ThirdStudy::MeasureWidget::draw() {
 	gl::color(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
-bool ThirdStudy::MeasureWidget::hit(Vec2f p) {
+bool FourthStudy::MeasureWidget::hit(Vec2f p) {
 	Matrix44f transform;
 	transform.translate(Vec3f(_position));
 	transform.rotate(Vec3f(0.0f, 0.0f, _angle));
@@ -134,7 +134,7 @@ bool ThirdStudy::MeasureWidget::hit(Vec2f p) {
 			|| (_outletIcon * _scale).contains(tp);
 }
 
-bool ThirdStudy::MeasureWidget::hitInlet(Vec2f p) {
+bool FourthStudy::MeasureWidget::hitInlet(Vec2f p) {
 	Matrix44f transform;
 	transform.translate(Vec3f(_position));
 	transform.rotate(Vec3f(0.0f, 0.0f, _angle));
@@ -144,7 +144,7 @@ bool ThirdStudy::MeasureWidget::hitInlet(Vec2f p) {
 	return (_inletIcon * _scale).contains(tp);
 }
 
-bool ThirdStudy::MeasureWidget::hitOutlet(Vec2f p) {
+bool FourthStudy::MeasureWidget::hitOutlet(Vec2f p) {
 	Matrix44f transform;
 	transform.translate(Vec3f(_position));
 	transform.rotate(Vec3f(0.0f, 0.0f, _angle));
@@ -154,7 +154,7 @@ bool ThirdStudy::MeasureWidget::hitOutlet(Vec2f p) {
 	return (_outletIcon * _scale).contains(tp);
 }
 
-void ThirdStudy::MeasureWidget::tap(Vec2f p) {
+void FourthStudy::MeasureWidget::tap(Vec2f p) {
 	Matrix44f transform;
 	transform.translate(Vec3f(_position));
 	transform.rotate(Vec3f(0.0f, 0.0f, _angle));
@@ -177,7 +177,7 @@ void ThirdStudy::MeasureWidget::tap(Vec2f p) {
 	Logger::instance().log(ss.str());
 }
 
-void ThirdStudy::MeasureWidget::play() {
+void FourthStudy::MeasureWidget::play() {
 	app::timeline().apply(&_cursorOffset, Vec2f(0.0f, 0.0f), 0);
 	app::timeline().appendTo(&_cursorOffset, Vec2f(_boundingBox.getWidth() * (1.0f - 1.0f/notes.size()), 0.0f), MEASUREWIDGET_NOTELENGTH*(notes.size()-1));
 	app::timeline().appendTo(&_cursorOffset, Vec2f(0.0f, 0.0f), MEASUREWIDGET_NOTELENGTH, EaseInOutSine());
@@ -196,7 +196,7 @@ void ThirdStudy::MeasureWidget::play() {
 
 void nop() { }
 
-void ThirdStudy::MeasureWidget::stop() {
+void FourthStudy::MeasureWidget::stop() {
 	app::timeline().clear();
 	app::timeline().apply(&_cursorOffset, Vec2f(0.0f, 0.0f), MEASUREWIDGET_NOTELENGTH, EaseInOutSine());
 	_cue->create(nop);
@@ -205,7 +205,7 @@ void ThirdStudy::MeasureWidget::stop() {
 	Logger::instance().log(stringstream() << "MeasureWidget::stop -- id: " << _id);
 }
 
-void ThirdStudy::MeasureWidget::playNote(int n) {
+void FourthStudy::MeasureWidget::playNote(int n) {
 	int playnote = getNote(n);
 	if(playnote < 40) {
 		return;
@@ -217,7 +217,7 @@ void ThirdStudy::MeasureWidget::playNote(int n) {
 	theApp->sender()->sendMessage(m);
 }
 
-unsigned int ThirdStudy::MeasureWidget::getNote(int n) {
+unsigned int FourthStudy::MeasureWidget::getNote(int n) {
 	for(int i = 0; i < notes[n].size(); i++) {
 		if(notes[n][i]) {
 			return _midiNotes[i];
@@ -226,26 +226,26 @@ unsigned int ThirdStudy::MeasureWidget::getNote(int n) {
 	return 0;
 }
 
-void ThirdStudy::MeasureWidget::finishedPlaying() {
+void FourthStudy::MeasureWidget::finishedPlaying() {
 	isPlaying = false;
 	TheApp *theApp = (TheApp *)App::get();
 	theApp->measureHasFinishedPlaying(_id);
 	Logger::instance().log(stringstream() << "MeasureWidget::finishedPlaying -- id: " << _id);
 }
 
-void ThirdStudy::MeasureWidget::moveBy(Vec2f v) {
+void FourthStudy::MeasureWidget::moveBy(Vec2f v) {
 	_position += v;
 }
 
-void ThirdStudy::MeasureWidget::zoomBy(float s) {
+void FourthStudy::MeasureWidget::zoomBy(float s) {
 //    _scale += s;
 }
 
-void ThirdStudy::MeasureWidget::rotateBy(float a) {
+void FourthStudy::MeasureWidget::rotateBy(float a) {
     _angle += a;
 }
 
-void ThirdStudy::MeasureWidget::toggle(pair<int, int> note, bool log) {
+void FourthStudy::MeasureWidget::toggle(pair<int, int> note, bool log) {
 	stringstream ss;
 	ss << "MeasureWidget::toggle id:" << _id << " -- pair: (" << note.first << ", " << note.second << ")";
 	if(note.first >= 0 && note.first < notes.size() && note.second >= 0 && note.second < notes[0].size()) {
@@ -265,7 +265,7 @@ void ThirdStudy::MeasureWidget::toggle(pair<int, int> note, bool log) {
 	}
 }
 
-void ThirdStudy::MeasureWidget::processStroke(const TouchTrace &trace) {
+void FourthStudy::MeasureWidget::processStroke(const TouchTrace &trace) {
 	Matrix44f transform;
 	transform.translate(Vec3f(_position));
 	transform.rotate(Vec3f(0.0f, 0.0f, _angle));

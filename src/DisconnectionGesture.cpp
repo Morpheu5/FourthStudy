@@ -2,28 +2,28 @@
 
 #include "TouchPoint.h"
 
-ThirdStudy::DisconnectionGesture::DisconnectionGesture() :
+FourthStudy::DisconnectionGesture::DisconnectionGesture() :
 _widgetId(0), _toWid(0) { }
 
-ThirdStudy::DisconnectionGesture::DisconnectionGesture(const unsigned long fromWid, const unsigned long toWid) :
+FourthStudy::DisconnectionGesture::DisconnectionGesture(const unsigned long fromWid, const unsigned long toWid) :
 _widgetId(fromWid), _toWid(toWid) {
 	
 }
 
-ThirdStudy::DisconnectionGesture::~DisconnectionGesture() { }
+FourthStudy::DisconnectionGesture::~DisconnectionGesture() { }
 
-const bool ThirdStudy::DisconnectionGesture::isOnWidget() {
+const bool FourthStudy::DisconnectionGesture::isOnWidget() {
 	return _widgetId != 0;
 }
 
-const unsigned long ThirdStudy::DisconnectionGesture::widgetId() const {
+const unsigned long FourthStudy::DisconnectionGesture::widgetId() const {
 	return _widgetId;
 }
 
-const unsigned long ThirdStudy::DisconnectionGesture::fromWid() const {
+const unsigned long FourthStudy::DisconnectionGesture::fromWid() const {
 	return _widgetId;
 }
 
-const unsigned long ThirdStudy::DisconnectionGesture::toWid() const {
+const unsigned long FourthStudy::DisconnectionGesture::toWid() const {
 	return _toWid;
 }

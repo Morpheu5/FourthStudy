@@ -8,7 +8,7 @@ using namespace std;
 
 #define MEASUREWIDGET_NOTELENGTH 0.25f
 
-namespace ThirdStudy {
+namespace FourthStudy {
 	
 	class TouchTrace;
     

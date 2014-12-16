@@ -4,7 +4,7 @@
 
 using namespace std;
 
-namespace ThirdStudy {
+namespace FourthStudy {
 	
 	class Gesture;
 	class TouchTrace;

@@ -3,7 +3,7 @@
 #include "Gesture.h"
 #include "TouchTrace.h"
 
-namespace ThirdStudy {
+namespace FourthStudy {
 	
 	class MusicStrokeGesture : public Gesture {
 		TouchTrace _stroke;

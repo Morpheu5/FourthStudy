@@ -2,31 +2,31 @@
 
 #include "TouchPoint.h"
 
-#include "ThirdStudyApp.h"
+#include "FourthStudyApp.h"
 
 using namespace ci;
 using namespace ci::app;
 
-ThirdStudy::TouchTrace::TouchTrace() {
+FourthStudy::TouchTrace::TouchTrace() {
 	state = State::TOUCH_DOWN;
 	isVisible = true;
 	widgetId = 0;
 	_lifespan = FPS/6;
 }
 
-ThirdStudy::TouchTrace::~TouchTrace() {
+FourthStudy::TouchTrace::~TouchTrace() {
 	touchPoints.clear();
 }
 
-int ThirdStudy::TouchTrace::getSessionId() {
+int FourthStudy::TouchTrace::getSessionId() {
 	return touchPoints.back().getSessionId();
 }
 
-Vec2f ThirdStudy::TouchTrace::currentPosition() {
+Vec2f FourthStudy::TouchTrace::currentPosition() {
 	return touchPoints.back().getPos();
 }
 
-Vec2f ThirdStudy::TouchTrace::previousPosition() {
+Vec2f FourthStudy::TouchTrace::previousPosition() {
 	if(touchPoints.size() > 1) {
 		return prev(touchPoints.end(), 2)->getPos();
 	} else {
@@ -34,36 +34,36 @@ Vec2f ThirdStudy::TouchTrace::previousPosition() {
 	}
 }
 
-int ThirdStudy::TouchTrace::lifespan() {
+int FourthStudy::TouchTrace::lifespan() {
 	return _lifespan;
 }
 
-bool ThirdStudy::TouchTrace::isDead() {
+bool FourthStudy::TouchTrace::isDead() {
 	return _lifespan == 0;
 }
 
-void ThirdStudy::TouchTrace::update() {
+void FourthStudy::TouchTrace::update() {
 	if(!isVisible) {
 		_lifespan--;
 	}
 }
 
-void ThirdStudy::TouchTrace::resurrect() {
+void FourthStudy::TouchTrace::resurrect() {
 	_lifespan = FPS/6;
 	isVisible = true;
 }
 
-bool ThirdStudy::TouchTrace::isOnWidget() {
+bool FourthStudy::TouchTrace::isOnWidget() {
 	return widgetId != 0;
 }
 
 // TODO State info should be added to the cursors
-void ThirdStudy::TouchTrace::addCursorDown(ThirdStudy::TouchPoint p) {
+void FourthStudy::TouchTrace::addCursorDown(FourthStudy::TouchPoint p) {
 	touchPoints.push_back(p);
 	state = State::TOUCH_DOWN;
 }
 
-void ThirdStudy::TouchTrace::cursorMove(ThirdStudy::TouchPoint p) {
+void FourthStudy::TouchTrace::cursorMove(FourthStudy::TouchPoint p) {
 	touchPoints.push_back(p);
 	
 	if(p.getSpeed().length() < 0.025f) {
@@ -73,7 +73,7 @@ void ThirdStudy::TouchTrace::cursorMove(ThirdStudy::TouchPoint p) {
 	}
 }
 
-void ThirdStudy::TouchTrace::addCursorUp(ThirdStudy::TouchPoint p) {
+void FourthStudy::TouchTrace::addCursorUp(FourthStudy::TouchPoint p) {
 	touchPoints.push_back(p);
 	state = State::TOUCH_UP;
 }

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A381D1B11886BABE00CA94D4 /* CinderApp.icns in Resources */ = {isa = PBXBuildFile; fileRef = D0F843C1FD034602B2C3566D /* CinderApp.icns */; };
-		A381D1B31886BABE00CA94D4 /* ThirdStudyApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8866C91BE3B24143A08D1377 /* ThirdStudyApp.cpp */; };
+		A381D1B31886BABE00CA94D4 /* FourthStudyApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8866C91BE3B24143A08D1377 /* FourthStudyApp.cpp */; };
 		A381D1C01886BABE00CA94D4 /* BoxWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C5B7D6017BCE4C8005A5471 /* BoxWidget.cpp */; };
 		A381D1C11886BABE00CA94D4 /* PinchGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C5B7D6117BCE4C8005A5471 /* PinchGestureRecognizer.cpp */; };
 		A381D1C21886BABE00CA94D4 /* TapGestureRecognizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C5B7D6217BCE4C8005A5471 /* TapGestureRecognizer.cpp */; };
@@ -55,7 +55,7 @@
 		00B784B10FF439BC000DE1D7 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		00B784B20FF439BC000DE1D7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		1155F1ACA17E465AB2B526DD /* ThirdStudy_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThirdStudy_Prefix.pch; sourceTree = "<group>"; };
+		1155F1ACA17E465AB2B526DD /* FourthStudy_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FourthStudy_Prefix.pch; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		2C1AD4F617CF626D006BC4FC /* DisconnectionGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = DisconnectionGesture.h; path = ../include/DisconnectionGesture.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -87,16 +87,16 @@
 		2CCC11DD17D7494B00257A5E /* Logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Logger.h; path = ../include/Logger.h; sourceTree = "<group>"; };
 		5323E6B10EAFCA74003A9687 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		5323E6B50EAFCA7E003A9687 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
-		594E31F389134B6399BC25A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8866C91BE3B24143A08D1377 /* ThirdStudyApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; name = ThirdStudyApp.cpp; path = ../src/ThirdStudyApp.cpp; sourceTree = "<group>"; };
-		A3630A0617B30EA90073B095 /* ThirdStudyApp.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = ThirdStudyApp.h; path = ../include/ThirdStudyApp.h; sourceTree = "<group>"; };
+		8866C91BE3B24143A08D1377 /* FourthStudyApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; name = FourthStudyApp.cpp; path = ../src/FourthStudyApp.cpp; sourceTree = "<group>"; };
+		A3630A0617B30EA90073B095 /* FourthStudyApp.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = FourthStudyApp.h; path = ../include/FourthStudyApp.h; sourceTree = "<group>"; };
+		A3681AA21A405BCB00C89C37 /* FourthStudy-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FourthStudy-Info.plist"; sourceTree = "<group>"; };
 		A3703C1617AC2C8F00002544 /* TouchPoint.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = TouchPoint.h; path = ../include/TouchPoint.h; sourceTree = "<group>"; };
 		A3703C1717AC2C8F00002544 /* TouchTrace.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = TouchTrace.h; path = ../include/TouchTrace.h; sourceTree = "<group>"; };
 		A3703C1817AC458A00002544 /* GestureRecognizer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = GestureRecognizer.h; path = ../include/GestureRecognizer.h; sourceTree = "<group>"; };
 		A3703C1917AC480800002544 /* Gesture.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = Gesture.h; path = ../include/Gesture.h; sourceTree = "<group>"; };
 		A3703C1A17AC483600002544 /* TapGesture.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = TapGesture.h; path = ../include/TapGesture.h; sourceTree = "<group>"; };
 		A3703C1B17AC4ABE00002544 /* TapGestureRecognizer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; name = TapGestureRecognizer.h; path = ../include/TapGestureRecognizer.h; sourceTree = "<group>"; };
-		A381D1DD1886BABE00CA94D4 /* ThirdStudy-multi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ThirdStudy-multi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A381D1DD1886BABE00CA94D4 /* FourthStudy-multi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FourthStudy-multi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CDD0FC19E7E724003D1167 /* IpEndpointName.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
 		A3CDD0FD19E7E724003D1167 /* IpEndpointName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
 		A3CDD0FE19E7E724003D1167 /* NetworkingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 				2C7C4B5A17BE38BD0057FC57 /* Gesture Recognizers */,
 				2C7C4B5917BE38980057FC57 /* Gestures */,
 				2C7C4B5817BE387C0057FC57 /* Widgets */,
-				8866C91BE3B24143A08D1377 /* ThirdStudyApp.cpp */,
+				8866C91BE3B24143A08D1377 /* FourthStudyApp.cpp */,
 				2C7C4B4F17BE2DF10057FC57 /* TouchTrace.cpp */,
 				2C7C4B5117BE2F800057FC57 /* TouchPoint.cpp */,
 			);
@@ -207,7 +207,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A381D1DD1886BABE00CA94D4 /* ThirdStudy-multi.app */,
+				A381D1DD1886BABE00CA94D4 /* FourthStudy-multi.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,12 +231,12 @@
 				2C7C4B5717BE38530057FC57 /* Gesture Recognizers */,
 				2C7C4B5617BE383B0057FC57 /* Gestures */,
 				2C7C4B5517BE38270057FC57 /* Widgets */,
-				A3630A0617B30EA90073B095 /* ThirdStudyApp.h */,
+				A3630A0617B30EA90073B095 /* FourthStudyApp.h */,
 				A3703C1617AC2C8F00002544 /* TouchPoint.h */,
 				A3703C1717AC2C8F00002544 /* TouchTrace.h */,
 				F2FF3139BADE486594B31873 /* Resources.h */,
 				2CCC11DD17D7494B00257A5E /* Logger.h */,
-				1155F1ACA17E465AB2B526DD /* ThirdStudy_Prefix.pch */,
+				1155F1ACA17E465AB2B526DD /* FourthStudy_Prefix.pch */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -244,8 +244,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A3681AA21A405BCB00C89C37 /* FourthStudy-Info.plist */,
 				D0F843C1FD034602B2C3566D /* CinderApp.icns */,
-				594E31F389134B6399BC25A4 /* Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -435,9 +435,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A381D1AF1886BABE00CA94D4 /* ThirdStudy */ = {
+		A381D1AF1886BABE00CA94D4 /* FourthStudy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A381D1DA1886BABE00CA94D4 /* Build configuration list for PBXNativeTarget "ThirdStudy" */;
+			buildConfigurationList = A381D1DA1886BABE00CA94D4 /* Build configuration list for PBXNativeTarget "FourthStudy" */;
 			buildPhases = (
 				A381D1B01886BABE00CA94D4 /* Resources */,
 				A381D1B21886BABE00CA94D4 /* Sources */,
@@ -447,10 +447,10 @@
 			);
 			dependencies = (
 			);
-			name = ThirdStudy;
+			name = FourthStudy;
 			productInstallPath = "$(HOME)/Applications";
 			productName = SecondStudy;
-			productReference = A381D1DD1886BABE00CA94D4 /* ThirdStudy-multi.app */;
+			productReference = A381D1DD1886BABE00CA94D4 /* FourthStudy-multi.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -459,9 +459,9 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ThirdStudy" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "FourthStudy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -475,7 +475,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A381D1AF1886BABE00CA94D4 /* ThirdStudy */,
+				A381D1AF1886BABE00CA94D4 /* FourthStudy */,
 			);
 		};
 /* End PBXProject section */
@@ -496,7 +496,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A381D1B31886BABE00CA94D4 /* ThirdStudyApp.cpp in Sources */,
+				A381D1B31886BABE00CA94D4 /* FourthStudyApp.cpp in Sources */,
 				A3CDD12919E7E724003D1167 /* OscMessage.cpp in Sources */,
 				A3CDD11F19E7E724003D1167 /* NetworkingUtils.cpp in Sources */,
 				A381D1C01886BABE00CA94D4 /* BoxWidget.cpp in Sources */,
@@ -535,7 +535,6 @@
 		A381D1DB1886BABE00CA94D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CINDER_PATH = ../../cinder_0.8.6_mac;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -544,20 +543,20 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ThirdStudy_Prefix.pch;
+				GCC_PREFIX_HEADER = FourthStudy_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INFOPLIST_FILE = "ThirdStudy-multi-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/FourthStudy-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../cinder_0.8.6_mac/lib\"",
 				);
 				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder_d.a\"";
-				PRODUCT_NAME = "ThirdStudy-multi";
+				PRODUCT_NAME = "FourthStudy-multi";
 				SDKROOT = macosx;
 				SYMROOT = ./build;
 				USER_HEADER_SEARCH_PATHS = "\"$(CINDER_PATH)/include\" ../include $(CINDER_PATH)/blocks/OSC/src $(CINDER_PATH)/blocks/TUIO/include";
@@ -568,7 +567,6 @@
 		A381D1DC1886BABE00CA94D4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CINDER_PATH = ../../cinder_0.8.6_mac;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -578,16 +576,16 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ThirdStudy_Prefix.pch;
+				GCC_PREFIX_HEADER = FourthStudy_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INFOPLIST_FILE = "ThirdStudy-multi-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/FourthStudy-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../cinder_0.8.6_mac/lib\"",
 				);
 				OTHER_LDFLAGS = "\"$(CINDER_PATH)/lib/libcinder.a\"";
-				PRODUCT_NAME = "ThirdStudy-multi";
+				PRODUCT_NAME = "FourthStudy-multi";
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
 				SYMROOT = ./build;
@@ -600,7 +598,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CINDER_PATH = ../../cinder_0.8.5_mac;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -620,7 +617,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CINDER_PATH = ../../cinder_0.8.5_mac;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -638,7 +634,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A381D1DA1886BABE00CA94D4 /* Build configuration list for PBXNativeTarget "ThirdStudy" */ = {
+		A381D1DA1886BABE00CA94D4 /* Build configuration list for PBXNativeTarget "FourthStudy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A381D1DB1886BABE00CA94D4 /* Debug */,
@@ -647,7 +643,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ThirdStudy" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "FourthStudy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,

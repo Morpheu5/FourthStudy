@@ -11,7 +11,7 @@ using namespace std;
 using namespace ci;
 using namespace ci::app;
 
-namespace ThirdStudy {
+namespace FourthStudy {
 	
 	class Gesture;
 	class GestureRecognizer;
@@ -69,7 +69,7 @@ namespace ThirdStudy {
 		int _signals;
 		int _counter;
 		
-		// ThirdStudy additions
+		// FourthStudy additions
 		
 		map<std::string, vector<int>> _scales;
 		
